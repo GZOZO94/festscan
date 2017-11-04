@@ -21,10 +21,10 @@
 			var myapp=angular.module('myapp',[]);
 			myapp.controller('mycont',function($scope,$http){
 				$scope.request=function(){
-					let data={'id':'FestScanApp','gps':{'x':12.0,'y':2.3}};
-					$http.post('/FestScan/getNearEvents',data).then(function(res){
+					let data={'id':'FestScanApp','gps':{'x':70,'y':2.3},'radius':50,'type':'Party'};
+					$http.post('/FestScan/getEventsByType',data).then(function(res){
 						if(res.data.length!==0){
-							$scope.message=res.data[0].test;
+							$scope.message=res.data[0].type;
 						}
 						else{
 							$scope.message='Nincs találat';
