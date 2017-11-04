@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html lang="hu">
+	<head>
+		<meta http-equiv="Content_Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+		<script src="/Frontend/jquery-3.2.1.min.js"></script>
+		<script src="/Frontend/angular.min.js"></script>
+		<script src="/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+		<title>FestScan Teszt</title>
+	</head>
+	<body ng-app="myapp" ng-controller="mycont" ng-cloak>
+		<div class="container">
+			<div class="jumbotron">
+				<h1>A kapott üzenet: <br /></h1>
+				<p>{{message}}</p>
+				<button class="btn btn-primary" ng-click="request()">Üzenet kérése</button>
+			</div>
+		</div>
+		<script>
+			var myapp=angular.module('myapp',[]);
+			myapp.controller('mycont',function($scope,$http){
+				$scope.request=function(){
+					let data={'id':'FestScanApp','gps':{'x':12.0,'y':2.3}};
+					$http.post('/FestScan/getNearEvents',data).then(function(res){
+						if(res.data.length!==0){
+							$scope.message=res.data[0].test;
+						}
+						else{
+							$scope.message='Nincs találat';
+						}
+					})
+				};
+			});
+		</script>
+	</body>
+</html>

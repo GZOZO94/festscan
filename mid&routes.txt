@@ -1,0 +1,26 @@
+﻿FestScan
+
+FestScanRoutes
+
+POST /FestScan/getNearEvents - Visszaadja az összes találatot x sugarú körben a megadott helyhez képest.
+	authMW,
+	getNearEventsMW
+
+POST /FestScan/getEventsByType - Visszaadja az összes abba a kategóriába tartozó eseményt adott hely körül x sugarú környezetben.
+	authMW,
+	getEventsByTypeMW
+
+POST /FestScan/getEventsByName - Visszaadja az összes olyan nevű partit amire rákeresett.
+	authMW,
+	getEventsByNameMW
+	
+POST /FestScan/getEventsByPerformer
+	authMW,
+	getEventsByPerformerMW
+	
+Middleware-ek
+	authMW - Az app küld egy azonosítót, és ha az megegyezik a várttal, csak akkor csinál bármit is.
+	getNearEventsMW - Megkapja a földrajzi helyet (GPS), és ebből visszaadja az összes megadott tartományban lévő eseményt.
+	getEventsByTypeMW - Megkapja a party típusát, és visszatér az összes találattal az adot hely kötül x sugarú körben.
+	getEventsByNameMW - Megkapja az esemény nevét, és visszatér a találatokkal.
+	getEventsByPerformerMW - Megkapja a fellépő nevét, és visszatér a találatokkal.
