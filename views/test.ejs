@@ -24,7 +24,7 @@
 					let data={'id':'FestScanApp','gps':{'x':70,'y':2.3},'radius':50,'type':'Party'};
 					$http.post('/FestScan/getEventsByType',data).then(function(res){
 						if(res.data.length!==0){
-							$scope.message=res.data[0].type;
+							$scope.message=res.data[0].gps_x;
 						}
 						else{
 							$scope.message='Nincs találat';
