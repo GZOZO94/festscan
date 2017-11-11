@@ -1,27 +1,22 @@
 ﻿const authMW=require('../middlewares/authMW');
 const getNearEventsMW=require('../middlewares/getNearEventsMW');
-const getEventsByTypeMW=require('../middlewares/getEventsByTypeMW');
-const getEventsByNameMW=require('../middlewares/getEventsByNameMW');
-const getEventsByPerformerMW=require('../middlewares/getEventsByPerformerMW');
+const getEventsPictureMW=require('../middlewares/getEventsPictureMW');
+const getEventsDescriptionMW=require('../middlewares/getEventsDescriptionMW');
 
 
-module.exports = function (app,pg,connectionString) {
+module.exports = function (app,pg,connectionString,fs,path) {
 
 	app.post('/FestScan/getNearEvents',
 		authMW(),
 		getNearEventsMW(pg,connectionString)
 	);
-	app.post('/FestScan/getEventsByType',
+	app.post('/FestScan/getEventsPicture',
 		authMW(),
-		getEventsByTypeMW(pg,connectionString)
+		getEventsPictureMW(pg,connectionString,fs,path)
 	);
-	app.post('/FestScan/getEventsByName',
+	app.post('/FestScan/getEventsDescription',
 		authMW(),
-		getEventsByNameMW(pg,connectionString)
-	);
-	app.post('/FestScan/getEventsByPerformer',
-		authMW(),
-		getEventsByPerformerMW(pg,connectionString)
+		getEventsDescriptionMW(pg,connectionString)
 	);
 	app.get('/',
 		function (req, res, next) {

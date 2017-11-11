@@ -6,28 +6,70 @@
 		<link rel="stylesheet" href="/bootstrap-3.3.7-dist/css/bootstrap.min.css">
 		<script src="/Frontend/jquery-3.2.1.min.js"></script>
 		<script src="/Frontend/angular.min.js"></script>
+		<script src="/Frontend/angular-base64.min.js"></script>
 		<script src="/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 		<title>FestScan Teszt</title>
 	</head>
 	<body ng-app="myapp" ng-controller="mycont" ng-cloak>
 		<div class="container">
+			<h2>getNearEvents</h2>
 			<div class="jumbotron">
 				<h1>A kapott üzenet: <br /></h1>
-				<p>{{message}}</p>
-				<button class="btn btn-primary" ng-click="request()">Üzenet kérése</button>
+				<p>{{message1}}</p>
+				<button class="btn btn-primary" ng-click="request1()">Üzenet kérése</button>
+			</div>
+		</div>
+		<div class="container">
+			<h2>getEventsPicture</h2>
+			<div class="jumbotron">
+				<h1>A kapott üzenet: <br /></h1>
+				<button class="btn btn-primary" ng-click="request2()">Üzenet kérése</button>
+			</div>
+		</div>
+		<div class="container">
+			<h2>getEventsDescription</h2>
+			<div class="jumbotron">
+				<h1>A kapott üzenet: <br /></h1>
+				<p>{{message4}}</p>
+				<button class="btn btn-primary" ng-click="request3()">Üzenet kérése</button>
 			</div>
 		</div>
 		<script>
-			var myapp=angular.module('myapp',[]);
-			myapp.controller('mycont',function($scope,$http){
-				$scope.request=function(){
-					let data={'id':'FestScanApp','gps':{'x':70,'y':2.3},'radius':50,'type':'Party'};
-					$http.post('/FestScan/getEventsByType',data).then(function(res){
-						if(res.data.length!==0){
-							$scope.message=res.data[0].gps_x;
+			var myapp=angular.module('myapp',['base64']);
+			myapp.controller('mycont',function($scope,$http,$base64,$window){
+				$scope.request1=function(){
+					let data={'id':'FestScanApp','gps':{'x':70,'y':2.3},'radius':50,'ishere':'{2,3,4,5,6}'};
+					$http.post('/FestScan/getNearEvents',data).then(function(res){
+						console.log(res);
+						if(res.data.length!==0 && angular.isDefined(res.data[0])){
+							$scope.message1=res.data;
 						}
 						else{
-							$scope.message='Nincs találat';
+							$scope.message1='Nincs találat';
+						}
+					})
+				};
+				$scope.request2=function(){
+					let data={'id':'FestScanApp','eventid':1};
+					$http.post('/FestScan/getEventsPicture',data).then(function(res){
+						if(res.data.length!==0 && angular.isDefined(res.data[0])){
+							console.log(res.data);
+							$scope.message3="Hello";
+						}
+						else{
+							$scope.message2='Nincs találat';
+						}
+					})
+				};
+				$scope.request3=function(){
+					let data={'id':'FestScanApp','eventid':2};
+					$http.post('/FestScan/getEventsDescription',data).then(function(res){
+						console.log(res);
+						if(res.data.length!==0 && angular.isDefined(res.data[0])){
+							$scope.message4=res.data;
+						}
+						else{
+							$scope.message4='Nincs találat';
 						}
 					})
 				};

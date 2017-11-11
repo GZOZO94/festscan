@@ -6,21 +6,17 @@ POST /FestScan/getNearEvents - Visszaadja az összes találatot x sugarú körbe
 	authMW,
 	getNearEventsMW
 
-POST /FestScan/getEventsByType - Visszaadja az összes abba a kategóriába tartozó eseményt adott hely körül x sugarú környezetben.
-	authMW,
-	getEventsByTypeMW
 
-POST /FestScan/getEventsByName - Visszaadja az összes olyan nevű partit amire rákeresett.
+POST /FestScan/getEventsPicture - Visszaadja az esemény képét
 	authMW,
-	getEventsByNameMW
-	
-POST /FestScan/getEventsByPerformer
+	getEventsPictureMW
+
+POST /FestScan/getEventsDescription - Visszaadja az esemény leírását.
 	authMW,
-	getEventsByPerformerMW
+	getEventsDescriptionMW
 	
 Middleware-ek
 	authMW - Az app küld egy azonosítót, és ha az megegyezik a várttal, csak akkor csinál bármit is.
-	getNearEventsMW - Megkapja a földrajzi helyet (GPS), és ebből visszaadja az összes megadott tartományban lévő eseményt.
-	getEventsByTypeMW - Megkapja a party típusát, és visszatér az összes találattal az adot hely kötül x sugarú körben.
-	getEventsByNameMW - Megkapja az esemény nevét, és visszatér a találatokkal.
-	getEventsByPerformerMW - Megkapja a fellépő nevét, és visszatér a találatokkal.
+	getNearEventsMW - Megkapja a földrajzi helyet (GPS), és ebből visszaadja az összes megadott tartományban lévő esemény: Id, GPS, Név,Típus, RÖvid leírás, Előadó.
+	getEventsPictureMW - Megkapja az esemény azonosítóját, és ebből visszaadja az eseményhez tartozó képet.
+	getEventsDescriptionMW - Megkapja ez esemény azonostóját, és visszaküldi a részletes lerását az eseménynek.
