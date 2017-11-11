@@ -23,6 +23,7 @@
 			<h2>getEventsPicture</h2>
 			<div class="jumbotron">
 				<h1>A kapott üzenet: <br /></h1>
+				<p>{{message3}}</p>
 				<button class="btn btn-primary" ng-click="request2()">Üzenet kérése</button>
 			</div>
 		</div>
@@ -54,10 +55,10 @@
 					$http.post('/FestScan/getEventsPicture',data).then(function(res){
 						if(res.data.length!==0 && angular.isDefined(res.data[0])){
 							console.log(res.data);
-							$scope.message3="Hello";
+							$scope.message3="Elküldve";
 						}
 						else{
-							$scope.message2='Nincs találat';
+							$scope.message3='Nincs találat';
 						}
 					})
 				};
