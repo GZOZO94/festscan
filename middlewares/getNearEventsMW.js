@@ -1,6 +1,6 @@
 ﻿module.exports = function (pg,connectionString) {
 	return function (req, res, next) {
-		if(req.body.gps===undefined || req.body.radius==undefined || req.body.ishere===undefined){
+		if((typeof req.body.gps==='undefined') || (typeof req.body.radius=='undefined') || (typeof req.body.ishere==='undefined')){
 			res.tpl.error="Hiba történt az GPS megadása során";
 			return res.status(200).send(res.tpl.error);
 		}

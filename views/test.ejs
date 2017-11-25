@@ -39,7 +39,7 @@
 			var myapp=angular.module('myapp',['base64']);
 			myapp.controller('mycont',function($scope,$http,$base64,$window){
 				$scope.request1=function(){
-					let data={'id':'FestScanApp','gps':{'x':0,'y':25},'radius':3,'ishere':'{1,6,7}'};
+					let data={'id':'FestScanApp','gps':{'x':47.494912,'y':19.042751},'radius':3,'ishere':'{2,6,7}'};
 					$http.post('/FestScan/getNearEvents',data).then(function(res){
 						console.log(res);
 						if(res.data.length!==0 && angular.isDefined(res.data[0])){

@@ -1,6 +1,6 @@
 ﻿module.exports = function (pg,connectionString) {
 	return function (req, res, next) {
-		if(req.body===undefined || req.body.eventid==undefined){
+		if((typeof req.body==='undefined') || (typeof req.body.eventid=='undefined')){
 			res.tpl.error="Hiba történt az esemény adatok megadása során";
 			return res.status(200).send(res.tpl.error);
 		}
@@ -11,7 +11,7 @@
 			   res.tpl.error=err;
 			   return res.status(200).send(res.tpl.error);
 			} 
-			client.query("select description from events where id=$1",[eventid],function(err,result){
+			client.query("select description, homepage, opening, place from events where id=$1",[eventid],function(err,result){
 				done();
 				console.log(result);
 				if(err){

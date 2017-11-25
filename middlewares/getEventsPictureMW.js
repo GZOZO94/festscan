@@ -1,6 +1,6 @@
 ﻿module.exports = function (pg,connectionString,fs,path) {
 	return function (req, res, next) {
-		if(req.body===undefined || req.body.eventid==undefined){
+		if((typeof req.body==='undefined') || (typeof req.body.eventid==='undefined')){
 			res.tpl.error="Hiba történt az esemény adatok megadása során";
 			return res.status(200).send(res.tpl.error);
 		}
