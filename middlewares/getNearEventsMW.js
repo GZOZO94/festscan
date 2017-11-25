@@ -9,14 +9,7 @@
 		let gps_y_min=req.body.gps.y-req.body.radius;
 		let gps_y_max=req.body.gps.y+req.body.radius;
 		let radius=req.body.radius;
-		/*if(gps_x_min<0 && gps_x_max<0){
-			gps_x_max=gps_x_min;
-			gps_x_min=gps_x_max;
-		}
-		if(gps_y_min<0 && gps_y_max<0){
-			gps_y_max=gps_y_min;
-			gps_y_min=gps_y_max;
-		}*/
+		
 		let ids=req.body.ishere;
 		pg.connect(connectionString,function(err,client,done) {
 			if(err){
@@ -24,7 +17,7 @@
 			   res.tpl.error=err;
 			   return res.status(200).send(res.tpl.error);
 			} 
-			client.query("select id, gps_x, gps_y, name, short_description, type from events where (abs($1-gps_x)<abs($2) or abs(gps_x-$3)<abs($2)) and (abs($4-gps_y)<abs($2) or abs(gps_y-$5)<abs($2)) and not id=any($6::int[])",[gps_x_max,radius,gps_x_min,gps_y_max,gps_y_min,ids],function(err,result){
+			client.query("select eventid, gps_x, gps_y, name, short_description, type from events where (abs($1-gps_x)<abs($2) or abs(gps_x-$3)<abs($2)) and (abs($4-gps_y)<abs($2) or abs(gps_y-$5)<abs($2)) and not eventid=any($6::int[])",[gps_x_max,radius,gps_x_min,gps_y_max,gps_y_min,ids],function(err,result){
 				done();
 				console.log(result.rows);
 				if(err){

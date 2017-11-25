@@ -11,7 +11,7 @@
 			   res.tpl.error=err;
 			   return res.status(200).send(res.tpl.error);
 			} 
-			client.query("select id, description, homepage, opening, place from events where id=$1",[eventid],function(err,result){
+			client.query("select eventid, description, homepage, opening, place from events where eventid=$1",[eventid],function(err,result){
 				done();
 				console.log(result);
 				if(err){

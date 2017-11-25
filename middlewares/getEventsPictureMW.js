@@ -11,7 +11,7 @@
 			   res.tpl.error=err;
 			   return res.status(200).send(res.tpl.error);
 			} 
-			client.query("select picture from events where id=$1",[eventid],function(err,result){
+			client.query("select picture from events where eventid=$1",[eventid],function(err,result){
 				done();
 				console.log(result.rows[0].picture);
 				if(err){
